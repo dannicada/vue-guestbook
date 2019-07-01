@@ -1,19 +1,65 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" class="small-container">
+    <guest-form @add:guest="addGuest"/>
+    <h1>Guests</h1>
+    <guest-table v-bind:guests="guests" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import GuestTable from './components/GuestTable.vue'
+import GuestForm from './components/GuestForm.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    GuestTable,
+    GuestForm,
+  },
+  data() {
+    return {
+      guests: [
+        {
+          id: 1,
+          name: 'ddd',
+          email: 'dfdgdg',
+          address: 'dddf',
+          comment: 'dfg'
+        },
+        {
+          id: 2,
+          name: 'Sammuel Ofordili',
+          email: 'Sammy@gmail.o',
+          address: 'dff',
+          comment: 'dgggg'
+        },       
+      ],
+      }
+    },
+    methods: {
+      addGuest(guest) {
+
+        //testing the arrival of new guest 
+        console.log(guest.name)
+        
+        const lastId = this.guests.length > 0 ? this.guests [this.guests.length -1].id : 0;
+        const id = lastId + 1;
+        const newGuest = {
+          name: guest.name,
+          email: guest.email,
+          address: guest.address,
+          comment: guest.comment,
+          id: id
+        };
+
+        //testing the assignment of new id
+        console.log(newGuest.id)
+
+        this.guests.push(newGuest);
+      }
+    },
   }
-}
+
 </script>
 
 <style>
@@ -24,5 +70,14 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+button {
+  background: #00935;
+  border: 1px solid #009435;
+}
+
+.small-container {
+  max-width:680px;
 }
 </style>
