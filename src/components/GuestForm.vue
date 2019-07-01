@@ -25,6 +25,9 @@ export default {
     name: "guest-form",
     data() {
         return {
+            submitting: false,
+            error: false,
+            success: false,
             guest: {
                 name: '',
                 email: '',
@@ -36,7 +39,54 @@ export default {
     methods: {
         handleSubmit() {
             console.log('handling submit')
+            this.submitting = true;
+            this.clearStatus();
+            //checking for no or invalid entry
+            if (this.invalidName || this.invalidEmail || this.invalidAddress || this.invalidComment){
+                this.error = true;
+                return
+                
+                //testing error detection
+                console.log("can't submit: input error");
+                
+            }
+            //continues to submiting if no error found
             this.$emit('add:guest', this.guest)
+
+            //reset form fields after submiting
+            this.employee = {
+                name: '',
+                email: '',
+                address: '',
+                comment: '',
+            }
+
+            //success after emiting
+            this.error = false
+            this.success = true
+            this.submitting = false
+
+        },
+        clearStatus() {
+            this.success = false;
+            this.error = false;
+        },
+    },
+    computed: {
+        invalidName() {
+            return this.guest.name === '';
+        },
+        invalidEmail() {
+            return this.guest.email === '';
+
+        },
+        invalidAddress() {
+            return this.guest.address === '';
+
+        },
+        invalidComment() {
+            return this.guest.comment === '';
+
         },
     },
 }
@@ -46,5 +96,17 @@ export default {
 <style scoped>
 form {
     margin-bottom: 2rem;
+}
+
+[class*='-message'] {
+    font-weight:500;
+}
+
+.error-message {
+    color: #d33c40;
+}
+
+.success-message {
+    color: #32a95d;
 }
 </style>
