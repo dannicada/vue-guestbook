@@ -79,21 +79,21 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  button {
+    background: #009435;
+    border: 1px solid #009435;
+  }
 
-button {
-  background: #00935;
-  border: 1px solid #009435;
-}
+  button:hover,
+  button:active,
+  button:focus {
+    background: #32a95d;
+    border: 1px solid #32a95d;
+  }
 
-.small-container {
-  max-width:680px;
-}
+  .small-container {
+    max-width:680px;
+  }
+
+
 </style>

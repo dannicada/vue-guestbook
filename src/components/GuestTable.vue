@@ -78,7 +78,7 @@ export default {
             if (guest.name === '' || guest.email === '' || guest.address === '' || guest.comment === '') 
             return
 
-            this.$emit('edit:guest', guest.id, guest)
+            this.$emit('edit:guest',guest.id, guest)
             this.editing = null
         },
     },
@@ -89,4 +89,12 @@ export default {
     button {
         margin: 0 0.5rem 0 0;
     }
-</style>
+
+    input {
+        margin: 0;
+    }
+
+    .empty-table {
+        text-align: center;
+    }
+    </style>
