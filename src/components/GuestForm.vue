@@ -3,19 +3,46 @@
 <form v-on:submit.prevent="handleSubmit">
 
 <label>Name</label>
-<input v-model="guest.name" type="text"/>
+<input 
+ref = "first"
+:class= "{'has-error' : submitting && invalidName}"
+@focus="clearStatus"
+@keypress="clearStatus"
+v-model="guest.name" 
+type="text"
+/>
 
 <label>Email</label>
-<input v-model="guest.email" type="text"/>
+<input 
+:class= "{'has-error' : submitting && invalidEmail}"
+@focus="clearStatus"
+v-model="guest.email" 
+type="text"
+/>
 
 <label>Address</label>
-<input v-model="guest.address" type="text"/>
+<input 
+:class= "{'has-error' : submitting && invalidAddress}"
+@focus="clearStatus"
+v-model="guest.address" 
+type="text"
+/>
 
 <label>Comment</label>
-<input v-model="guest.comment" type="text"/>
+<input 
+:class= "{'has-error' : submitting && invalidComment}"
+@focus="clearStatus"
+v-model="guest.comment" 
+type="text"/>
+
+<p v-if="error && submitting" class="error-message">
+    ❗please fill out all required fields
+</p>
+<p v-if="success" class="success-message">
+    ✅Guest successfully added
+</p>
 
 <button>Submit</button>
-
 </form>
 </div>
 </template>
@@ -44,22 +71,27 @@ export default {
             //checking for no or invalid entry
             if (this.invalidName || this.invalidEmail || this.invalidAddress || this.invalidComment){
                 this.error = true;
-                return
-                
                 //testing error detection
                 console.log("can't submit: input error");
+                return
+                
+                
                 
             }
-            //continues to submiting if no error found
+            //continues to submitting if no error found
             this.$emit('add:guest', this.guest)
 
-            //reset form fields after submiting
-            this.employee = {
+
+            //reset form fields after submitting
+            this.guest = {
                 name: '',
                 email: '',
                 address: '',
                 comment: '',
             }
+            this.$refs.first.focus()
+
+
 
             //success after emiting
             this.error = false
