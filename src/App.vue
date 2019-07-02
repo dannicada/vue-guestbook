@@ -2,7 +2,11 @@
   <div id="app" class="small-container">
     <guest-form @add:guest="addGuest"/>
     <h1>Guests</h1>
-    <guest-table v-bind:guests="guests" />
+    <guest-table
+    @delete:guest="deleteGuest"
+    @edit:guest="editGuest"
+    v-bind:guests="guests" 
+    />
   </div>
 </template>
 
@@ -56,7 +60,15 @@ export default {
         console.log(newGuest.id)
 
         this.guests.push(newGuest);
-      }
+      },
+      deleteGuest(id) {
+        this.guests=this.guests.filter(
+          guest => guest.id !==id
+        )
+      },
+      editGuest(id) {
+          
+      },
     },
   }
 
