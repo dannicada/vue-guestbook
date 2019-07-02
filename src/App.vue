@@ -1,12 +1,16 @@
 <template>
   <div id="app" class="small-container">
-    <guest-form @add:guest="addGuest"/>
+    <guest-form 
+    @add:guest="addGuest"
+    />
+    
     <h1>Guests</h1>
     <guest-table
     @delete:guest="deleteGuest"
     @edit:guest="editGuest"
     v-bind:guests="guests" 
     />
+
   </div>
 </template>
 
@@ -66,8 +70,8 @@ export default {
           guest => guest.id !==id
         )
       },
-      editGuest(id) {
-          
+      editGuest(id, updatedGuest) {
+          this.guests = this.guests.map(guest => guest.id === id ? updatedGuest : guest)
       },
     },
   }
