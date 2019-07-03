@@ -1,15 +1,18 @@
 <template>
   <div id="app" class="small-container">
+
+    <Reveal/>
+
     <guest-form 
     @add:guest="addGuest"
     />
-    
-    <h1>Guests</h1>
+  
     <guest-table
     @delete:guest="deleteGuest"
     @edit:guest="editGuest"
     v-bind:guests="guests" 
     />
+
 
   </div>
 </template>
@@ -17,12 +20,14 @@
 <script>
 import GuestTable from './components/GuestTable.vue'
 import GuestForm from './components/GuestForm.vue'
+import Reveal from "./components/Reveal.vue";
 
 export default {
   name: 'app',
   components: {
     GuestTable,
     GuestForm,
+    Reveal,
   },
   data() {
     return {
@@ -79,21 +84,6 @@ export default {
 </script>
 
 <style>
-  button {
-    background: #009435;
-    border: 1px solid #009435;
-  }
-
-  button:hover,
-  button:active,
-  button:focus {
-    background: #32a95d;
-    border: 1px solid #32a95d;
-  }
-
-  .small-container {
-    max-width:680px;
-  }
-
+  
 
 </style>

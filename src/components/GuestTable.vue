@@ -3,52 +3,56 @@
 <p v-if="guests.length < 1" class="empty-table">
     no guests
 </p>
-<table v-else>
-    <thead>
-        <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Address</th>
-        <th>Comment</th>
-        <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr v-for="guest in guests" :key="guest.id">
+<md-table md-card  v-else>
+ <md-table-toolbar>
+        <h1 class="md-title">Guests</h1>
+      </md-table-toolbar>
 
-        <td v-if="editing === guest.id">
-            <input type = "text" v-model="guest.name"/>
-        <td v-else>{{ guest.name }}</td>
+       <md-table-row>
+        <md-table-head md-numeric>ID</md-table-head>
+        <md-table-head>Name</md-table-head>
+        <md-table-head>Email</md-table-head>
+        <md-table-head>Address</md-table-head>
+        <md-table-head>Comment</md-table-head>
+        <md-table-head>Actions</md-table-head>
+      </md-table-row>
 
-        <td v-if="editing === guest.id">
-            <input type = "text" v-model="guest.email"/>
-        </td>
-        <td v-else>{{guest.email}}</td>
+      <md-table-row v-for="guest in guests" :key="guest.id">
+        <md-table-cell md-numeric>{{guest.id}}</md-table-cell>
+        <md-table-cell v-if="editing === guest.id"><input type = "text" v-model="guest.name"/></md-table-cell>
+        <md-table-cell v-else>{{guest.name}}</md-table-cell>
 
-        <td v-if="editing === guest.id">
-            <input type = "text" v-model="guest.address"/>
-        </td>
-        <td v-else>{{guest.address}}</td>
+        <md-table-cell v-if="editing === guest.id"><input type = "text" v-model="guest.email"/></md-table-cell>
+        <md-table-cell v-else>{{guest.email}}</md-table-cell>
         
-        <td v-if="editing === guest.id">
-            <input type = "text" v-model="guest.comment"/>
-        </td>
-        <td v-else>{{guest.comment}}</td>
+        <md-table-cell v-if="editing === guest.id"><input type = "text" v-model="guest.address"/></md-table-cell>
+        <md-table-cell v-else>{{guest.address}}</md-table-cell>
 
-        <td v-if="editing === guest.id">
-            <button v-on:click="editGuest(guest)"> Save </button>
-            <button v-on:click="cancelEdit(guest)" class="muted-button"> Cancel </button>
-        </td>
+        <md-table-cell v-if="editing === guest.id"><input type = "text" v-model="guest.comment"/></md-table-cell>
+        <md-table-cell v-else>{{guest.comment}}</md-table-cell>
 
-        <td v-else>
-        
-            <button v-on:click="editMode(guest)"> Edit </button>
-            <button v-on:click="$emit('delete:guest', guest.id)"> Delete</button>
-
-        </td>
-        </tr>
-    </tbody>
-</table>
+        <md-table-cell v-if="editing === guest.id">
+        <md-button v-on:click="editGuest(guest)" class="md-fab md-mini md-plain">
+            <md-icon>save</md-icon>
+            </md-button>
+            
+            <md-button v-on:click="cancelEdit(guest)" class="md-fab md-mini md-plain">
+            <md-icon>cancel</md-icon>
+            </md-button>
+        </md-table-cell>
+        <md-table-cell v-else>
+            <md-button v-on:click="editMode(guest)" class="md-fab md-mini md-plain">
+            <md-icon>edit</md-icon>
+            </md-button>
+            <md-button v-on:click="$emit('delete:guest', guest.id)" class="md-fab md-mini md-plain">
+            <md-icon> delete </md-icon>
+            </md-button>
+        </md-table-cell>
+      </md-table-row>
+    
+     
+   
+</md-table md-card>
 </div>
 </template>
 
@@ -85,16 +89,9 @@ export default {
 }
 </script>
 
-<style scoped>
-    button {
-        margin: 0 0.5rem 0 0;
-    }
-
-    input {
-        margin: 0;
-    }
-
-    .empty-table {
-        text-align: center;
-    }
+<style lang="scss" scoped>
+  small {
+    display: block;
+  }
+</style>
     </style>

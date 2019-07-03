@@ -125,20 +125,8 @@ export default {
 
 </script>
 
-<style scoped>
-form {
-    margin-bottom: 2rem;
-}
-
-[class*='-message'] {
-    font-weight:500;
-}
-
-.error-message {
-    color: #d33c40;
-}
-
-.success-message {
-    color: #32a95d;
-}
+<style lang="scss" scoped>
+  small {
+    display: block;
+  }
 </style>
