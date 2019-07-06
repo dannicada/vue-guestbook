@@ -1,26 +1,49 @@
 <template>
-  <div id="app" class="small-container">
+  <div id="app" class="page-container">
+    <md-app md-waterfall md-mode="fixed-last">
+      <md-app-toolbar class="md-large md-dense md-primary">
+        <div class="md-toolbar-row">
+          <div class="md-toolbar-section-start">
+           
 
-    <Reveal/>
+            <span class="md-title">My Title</span>
+          </div>
 
-    <guest-form 
-    @add:guest="addGuest"
-    />
-  
-    <guest-table
-    @delete:guest="deleteGuest"
-    @edit:guest="editGuest"
-    v-bind:guests="guests" 
-    />
+          
+        </div>
 
+        <div class="md-toolbar-row">
+          <md-tabs class="md-primary">
+            <md-tab id="tab-home" md-label="Home"> </md-tab>
+            <md-tab id="tab-favorites" md-label="Add Guest" to="/GuestForm"></md-tab>
+            <md-tab id="tab-posts" md-label="Manage Guests" to="/GuestTable"></md-tab>
+            <md-tab id="tab-pages" md-label="Pages" to="/Reveal" ></md-tab>
+          </md-tabs>
+        </div>
+      </md-app-toolbar>
 
+      <md-app-content>
+      
+    
+
+        <router-view   
+          @add:guest="addGuest"
+          @delete:guest="deleteGuest"
+          @edit:guest="editGuest"
+          v-bind:guests="guests" 
+        >
+        </router-view>
+
+      </md-app-content>
+    </md-app>
   </div>
 </template>
 
 <script>
 import GuestTable from './components/GuestTable.vue'
 import GuestForm from './components/GuestForm.vue'
-import Reveal from "./components/Reveal.vue";
+import Reveal from "./components/Reveal.vue"
+import Welcome from "./components/Welcome.vue"
 
 export default {
   name: 'app',
@@ -28,6 +51,7 @@ export default {
     GuestTable,
     GuestForm,
     Reveal,
+    Welcome,
   },
   data() {
     return {
