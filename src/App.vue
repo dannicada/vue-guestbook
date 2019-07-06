@@ -6,7 +6,7 @@
           <div class="md-toolbar-section-start">
            
 
-            <span class="md-title">My Title</span>
+            <span class="md-title">GuestBook</span>
           </div>
 
           
@@ -14,20 +14,15 @@
 
         <div class="md-toolbar-row">
           <md-tabs class="md-primary">
-            <md-tab id="tab-home" md-label="Home"> </md-tab>
+            <md-tab id="tab-home" md-label="Home" to="/home"> </md-tab>
             <md-tab id="tab-favorites" md-label="Add Guest" to="/GuestForm"></md-tab>
             <md-tab id="tab-posts" md-label="Manage Guests" to="/GuestTable"></md-tab>
-            <md-tab id="tab-pages" md-label="Pages" to="/Reveal" ></md-tab>
           </md-tabs>
         </div>
       </md-app-toolbar>
 
       <md-app-content>
       
-    
-        <temp
-          @add:guest="addGuest"
-        />
         <router-view   
           @add:guest="addGuest"
           @delete:guest="deleteGuest"
@@ -44,18 +39,14 @@
 <script>
 import GuestTable from './components/GuestTable.vue'
 import GuestForm from './components/GuestForm.vue'
-import Reveal from "./components/Reveal.vue"
 import Welcome from "./components/Welcome.vue"
-import temp from "./components/temp.vue"
 
 export default {
   name: 'app',
   components: {
     GuestTable,
     GuestForm,
-    Reveal,
     Welcome,
-    temp,
   },
   data() {
     return {

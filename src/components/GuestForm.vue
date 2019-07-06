@@ -1,51 +1,58 @@
 <template>
 <div id="guest-form">
-<form v-on:submit.prevent="handleSubmit">
+    <form novalidate class="md-layout" v-on:submit.prevent="handleSubmit">
+        <md-card class="md-layout-item">
+            <md-card-header>
+            <div class="md-title">Guest Form</div>
+            </md-card-header>
 
-<label>Name</label>
-<input 
-ref = "first"
-:class= "{'has-error' : submitting && invalidName}"
-@focus="clearStatus"
-@keypress="clearStatus"
-v-model="guest.name" 
-type="text"
-/>
+            <md-card-content>
 
-<label>Email</label>
-<input 
-:class= "{'has-error' : submitting && invalidEmail}"
-@focus="clearStatus"
-v-model="guest.email" 
-type="text"
-/>
+                <div class="md-layout-item md-small-size-100">
+                    <md-field :class= "{'md-invalid' : error && invalidName}">
+                        <label for="name">Name</label>
+                        <md-input ref="first" v-model="guest.name" @focus="clearStatus" @keypress="clearStatus"/>
+                        <span class="md-error" v-if="invalidName && error">Name is required</span>
+                    </md-field>
+                </div>
 
-<label>Address</label>
-<input 
-:class= "{'has-error' : submitting && invalidAddress}"
-@focus="clearStatus"
-v-model="guest.address" 
-type="text"
-/>
+                <div class="md-layout-item md-small-size-100">
+                    <md-field :class= "{'md-invalid' : error && invalidEmail}">
+                        <label for="name">Email</label>
+                        <md-input type="email" v-model="guest.email" @focus="clearStatus"/>
+                        <span class="md-error" v-if="invalidEmail && error">Email is required</span>
+                    </md-field>
+                </div>
 
-<label>Comment</label>
-<input 
-:class= "{'has-error' : submitting && invalidComment}"
-@focus="clearStatus"
-v-model="guest.comment" 
-type="text"/>
+                <div class="md-layout-item md-small-size-100">
+                    <md-field :class= "{'md-invalid' : error && invalidAddress}">
+                        <label for="name">Address</label>
+                        <md-input v-model="guest.address" @focus="clearStatus"/>
+                        <span class="md-error" v-if="invalidAddress && error">Address is required</span>
+                    </md-field>
+                </div>   
 
-<p v-if="error && submitting" class="error-message">
-    ❗please fill out all required fields
-</p>
-<p v-if="success" class="success-message">
-    ✅Guest successfully added
-</p>
+                <div class="md-layout-item md-small-size-100">
+                    <md-field :class= "{'md-invalid' : error && invalidComment}">
+                        <label for="name">Comment</label>
+                        <md-input v-model="guest.comment" @focus="clearStatus"/>
+                        <span class="md-error" v-if="invalidComment && this.error">Comment is required</span>
+                    </md-field>
+                </div>                                  
+
+            </md-card-content>
+
+            <md-progress-bar md-mode="indeterminate"  v-show="this.submitting" />
+
+            <md-card-actions>
+            <md-button type="submit" class="md-primary">Add Guest</md-button>
+            </md-card-actions>
+
+        </md-card>
+
 <md-snackbar :md-active.sync="success">The Guest {{ lastGuest }} was saved successfully!</md-snackbar>
-<span class="md-error"  v-if="invalidComment && submitting">The comment is required</span>
 
 
-<button>Submit</button>
 </form>
 </div>
 </template>
@@ -69,15 +76,18 @@ export default {
     },
     methods: {
         handleSubmit() {
-            console.log('handling submit')
             this.submitting = true;
+
+            window.setTimeout(() => {
             this.clearStatus();
+            console.log('handling submit')
             //checking for no or invalid entry
             if (this.invalidName || this.invalidEmail || this.invalidAddress || this.invalidComment){
                 this.error = true;
                 //testing error detection
                 console.log("can't submit: input error");
-                return
+                this.submitting = false;
+                return;
                 
                 
                 
@@ -87,6 +97,7 @@ export default {
             this.lastGuest = `${this.guest.name}`
 
 
+
             //reset form fields after submitting
             this.guest = {
                 name: '',
@@ -94,15 +105,15 @@ export default {
                 address: '',
                 comment: '',
             }
-            this.$refs.first.focus()
 
-
-
+            this.clearStatus();
+            this.submitting = false;
+        
             //success after emiting
             this.error = false
             this.success = true
-            this.submitting = false
 
+            },1500)
         },
         clearStatus() {
             this.success = false;
@@ -131,7 +142,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  small {
-    display: block;
+  .md-progress-bar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
   }
 </style>
