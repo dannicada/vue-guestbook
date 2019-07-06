@@ -25,7 +25,9 @@
       <md-app-content>
       
     
-
+        <temp
+          @add:guest="addGuest"
+        />
         <router-view   
           @add:guest="addGuest"
           @delete:guest="deleteGuest"
@@ -44,6 +46,7 @@ import GuestTable from './components/GuestTable.vue'
 import GuestForm from './components/GuestForm.vue'
 import Reveal from "./components/Reveal.vue"
 import Welcome from "./components/Welcome.vue"
+import temp from "./components/temp.vue"
 
 export default {
   name: 'app',
@@ -52,6 +55,7 @@ export default {
     GuestForm,
     Reveal,
     Welcome,
+    temp,
   },
   data() {
     return {

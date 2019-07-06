@@ -41,6 +41,9 @@ type="text"/>
 <p v-if="success" class="success-message">
     ✅Guest successfully added
 </p>
+<md-snackbar :md-active.sync="success">The Guest {{ lastGuest }} was saved successfully!</md-snackbar>
+<span class="md-error"  v-if="invalidComment && submitting">The comment is required</span>
+
 
 <button>Submit</button>
 </form>
@@ -55,6 +58,7 @@ export default {
             submitting: false,
             error: false,
             success: false,
+            lastGuest: null,
             guest: {
                 name: '',
                 email: '',
@@ -80,6 +84,7 @@ export default {
             }
             //continues to submitting if no error found
             this.$emit('add:guest', this.guest)
+            this.lastGuest = `${this.guest.name}`
 
 
             //reset form fields after submitting
