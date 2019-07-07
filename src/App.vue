@@ -6,7 +6,7 @@
           <div class="md-toolbar-section-start">
            
 
-            <span class="md-title">GuestBook</span>
+            <span class="md-title">GuestBo</span>
           </div>
 
           
