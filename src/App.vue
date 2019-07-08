@@ -13,9 +13,9 @@
         </div>
 
         <div class="md-toolbar-row">
-          <md-tabs class="md-transparent" md-alignment="fixed">
+          <md-tabs class="md-transparent">
             <md-tab id="tab-home" md-label="Home" to="/home"> </md-tab>
-            <md-tab id="tab-GuestForm" md-label="Add Guest" to="/GuestForm"></md-tab>
+            <md-tab id="tab-GuestForm" md-label="New Guest" to="/GuestForm"></md-tab>
             <md-tab id="tab-GuestTable" md-label="Manage Guests" to="/GuestTable"></md-tab>
           </md-tabs>
         </div>
@@ -53,18 +53,26 @@ export default {
       guests: [
         {
           id: 1,
-          name: 'ddd',
-          email: 'dfdgdg',
-          address: 'dddf',
-          comment: 'dfg'
-        },
+          name: 'Fiona Gallagher',
+          email: 'lifeoffiona@gmail.com',
+          address: '57 ring road, south-side chigago',
+          comment: 'complaints about previous service',
+        },        
         {
           id: 2,
+          name: 'David Stone',
+          email: 'dstone@yahoo.com',
+          address: '24 esasthill drive, manson',
+          comment: 'business man'
+        },
+        {
+          id: 3,
           name: 'Sammuel Ofordili',
-          email: 'Sammy@gmail.o',
-          address: 'dff',
-          comment: 'dgggg'
+          email: 'Sammy@gmail.com',
+          address: 'behind bosso market, minna',
+          comment: 'here to make enquiries about employment'
         },       
+
       ],
       }
     },
@@ -103,10 +111,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .md-tabs {
-    margin-top: 24px;
-  }
-  .md-app-content {
+  .md-toolbar-row {
     margin-top: 24px;
   }
 </style>

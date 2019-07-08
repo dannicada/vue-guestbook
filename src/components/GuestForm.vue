@@ -38,11 +38,13 @@
                         <md-input v-model="guest.comment" @focus="clearStatus"/>
                         <span class="md-error" v-if="invalidComment && this.error">Comment is required</span>
                     </md-field>
-                </div>                                  
+                </div>    
+                
+                <md-progress-bar md-mode="indeterminate"  v-show="this.submitting" />                              
 
             </md-card-content>
 
-            <md-progress-bar md-mode="indeterminate"  v-show="this.submitting" />
+           
 
             <md-card-actions>
             <md-button type="submit" class="md-primary">Add Guest</md-button>
