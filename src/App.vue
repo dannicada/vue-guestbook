@@ -1,22 +1,22 @@
 <template>
   <div id="app" class="page-container">
     <md-app md-waterfall md-mode="fixed-last">
-      <md-app-toolbar class="md-large md-dense md-primary">
+      <md-app-toolbar class="md-large md-dense">
         <div class="md-toolbar-row">
           <div class="md-toolbar-section-start">
            
 
-            <span class="md-title">GuestBo</span>
+          <span><img alt="eHealth4everyone" src="//ehealth4everyone.com/wp-content/uploads/2015/08/ehealth_teal_green_70px.png"></span>
           </div>
 
           
         </div>
 
         <div class="md-toolbar-row">
-          <md-tabs class="md-primary">
+          <md-tabs class="md-transparent" md-alignment="fixed">
             <md-tab id="tab-home" md-label="Home" to="/home"> </md-tab>
-            <md-tab id="tab-favorites" md-label="Add Guest" to="/GuestForm"></md-tab>
-            <md-tab id="tab-posts" md-label="Manage Guests" to="/GuestTable"></md-tab>
+            <md-tab id="tab-GuestForm" md-label="Add Guest" to="/GuestForm"></md-tab>
+            <md-tab id="tab-GuestTable" md-label="Manage Guests" to="/GuestTable"></md-tab>
           </md-tabs>
         </div>
       </md-app-toolbar>
@@ -102,7 +102,11 @@ export default {
 
 </script>
 
-<style>
-  
-
+<style lang="scss" scoped>
+  .md-tabs {
+    margin-top: 24px;
+  }
+  .md-app-content {
+    margin-top: 24px;
+  }
 </style>
