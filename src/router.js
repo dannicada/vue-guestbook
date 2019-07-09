@@ -5,6 +5,9 @@ import GuestTable from './components/GuestTable.vue'
 import GuestForm from './components/GuestForm.vue'
 import Welcome from './components/Welcome'
 import Login from './components/Login.vue'
+import Callback from './components/Callback.vue'
+
+import auth from '../auth/authService'
 
 Vue.use(VueRouter)
 
@@ -13,6 +16,11 @@ const router = new VueRouter({
     //base: '/home',
 
     routes: [
+        {
+            path: '/callback',
+            name: 'callback',
+            component: Callback
+        },
         {
             path: "/",
             component: Welcome,
@@ -43,5 +51,14 @@ const router = new VueRouter({
         
     ]
 });
+
+router.beforeEach((to, from, next) => {
+    if (to.path === "/" || to.path === "/callback" || to.path === "/home" || to.path === "/GuestForm" || auth.isAuthenticated()) {
+      return next();
+    }
+  
+   
+    auth.login({ target: to.path });
+  });
 
 export default router;

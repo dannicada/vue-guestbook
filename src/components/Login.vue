@@ -10,7 +10,7 @@
         </md-card-content>
 
         <md-card-actions>
-          <md-button @click="login">Login</md-button>
+          <md-button @click.prevent="login">Login</md-button>
         </md-card-actions>
       </md-ripple>
     </md-card>

@@ -9,6 +9,8 @@ const webAuth = new auth0.WebAuth({
   responseType: 'id_token',
   scope: 'openid profile email'
 });
+const localStorageKey = 'loggedIn';
+const loginEvent = 'loginEvent';
 
 class AuthService extends EventEmitter {
 

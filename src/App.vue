@@ -18,6 +18,7 @@
             <md-tab id="tab-GuestForm" md-label="New Guest" to="/GuestForm"></md-tab>
             <md-tab id="tab-GuestTable" md-label="Manage Guests" to="/GuestTable"></md-tab>
           </md-tabs>
+          <md-button v-if="isAuthenticated"  @click.prevent="logout" class="md-raised md-accent">Logout</md-button>
         </div>
       </md-app-toolbar>
 
@@ -74,8 +75,19 @@ export default {
         },       
 
       ],
-      }
+      isAuthenticated: false
+      };
+      
     },
+
+async created() {
+    try {
+      await this.$auth.renewTokens();
+    } catch (e) {
+      console.log(e);
+    }
+  },
+
     methods: {
       addGuest(guest) {
 
@@ -105,6 +117,18 @@ export default {
       editGuest(id, updatedGuest) {
           this.guests = this.guests.map(guest => guest.id === id ? updatedGuest : guest)
       },
+
+      //authentication methods
+      login() {
+      this.$auth.login();
+    },
+    logout() {
+      this.$auth.logOut();
+    },
+    handleLoginEvent(data) {
+      this.isAuthenticated = data.loggedIn;
+      this.profile = data.profile;
+    }
     },
   }
 
