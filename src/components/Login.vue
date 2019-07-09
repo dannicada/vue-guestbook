@@ -10,8 +10,21 @@
         </md-card-content>
 
         <md-card-actions>
-          <md-button>Login</md-button>
+          <md-button @click="login">Login</md-button>
         </md-card-actions>
       </md-ripple>
     </md-card>
 </template>
+
+<script>
+
+import authService from '../../auth/authService'
+export default {
+  name: "login",
+  methods : {
+    login(){
+      authService.login()
+    }
+  }
+}
+</script>

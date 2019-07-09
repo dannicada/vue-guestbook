@@ -2,7 +2,6 @@ import Vue from 'vue'
 import App from './App.vue'
 import VueMaterial from 'vue-material'
 import router from './router.js'
-import 'vue-material/dist/vue-material.min.css'
 
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
