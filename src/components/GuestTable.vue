@@ -1,9 +1,14 @@
 <template>
 <div id = "guest-table">
   <md-dialog-alert
-                :md-active.sync="deleted"
-                md-title="Guest deleted!"
-                md-content="Guest has been deleted." />
+    :md-active.sync="deleted"
+    md-title="Guest deleted!"
+    md-content="Guest has been deleted successfully." />
+
+<md-dialog-alert
+    :md-active.sync="edited"
+    md-title="Guest updated!"
+    md-content="Guest has been updated successfully." />    
                 
 <p v-if="guests.length < 1" class="empty-table">
     no guests
@@ -54,7 +59,7 @@
             <md-table-cell v-else>{{guest.comment}}</md-table-cell>
 
             <md-table-cell v-if="editing === guest.id">
-            <md-button v-on:click="editGuest(guest)"  class="md-fab md-mini md-plain">
+            <md-button @click="edited=true" v-on:click="editGuest(guest)"  class="md-fab md-mini md-plain">
                 <md-icon>save</md-icon>
                 </md-button>
                 
@@ -63,10 +68,10 @@
                 </md-button>
             </md-table-cell>
             <md-table-cell v-else>
-                <md-button v-on:click="editMode(guest)" :disabled="editing" class="md-fab md-mini md-plain">
+                <md-button v-on:click="editMode(guest)" :disabled="isEditing" class="md-fab md-mini md-plain">
                 <md-icon>edit</md-icon>
                 </md-button>
-                <md-button @click="deleted=true" v-on:click="$emit('delete:guest', guest.id)" :disabled="editing" class="md-fab md-mini md-plain">
+                <md-button @click="deleted=true" v-on:click="$emit('delete:guest', guest.id)" :disabled="isEditing" class="md-fab md-mini md-plain">
                 <md-icon> delete </md-icon>
                 </md-button>
             </md-table-cell>
@@ -86,6 +91,7 @@ export default {
     },
     data() {
         return {
+            isEditing: false,
             editing: null,
             deleted: false,
             edited: false,
@@ -95,11 +101,13 @@ export default {
         editMode(guest) {
             this.cachedGuest = Object.assign({}, guest)
             this.editing = guest.id
+            this.isEditing = true
         },
 
         cancelEdit(guest) {
             Object.assign(guest,this.cachedGuest)
             this.editing = null;
+            this.isEditing = false;
         },
 
         editGuest(guest) {
@@ -109,6 +117,7 @@ export default {
 
             this.$emit('edit:guest',guest.id, guest)
             this.editing = null
+            this.isEditing = false;
         },
     },
 }
