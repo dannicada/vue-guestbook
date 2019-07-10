@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>Loading...</p>
+  <md-progress-bar md-mode="indeterminate" />
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 export default {
   methods: {
     handleLoginEvent(data) {
-      this.$router.push(data.state.target || "/");
+      this.$router.push(data.state.target || "/GuestTable");
     }
   },
   created() {

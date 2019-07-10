@@ -1,5 +1,10 @@
 <template>
 <div id = "guest-table">
+  <md-dialog-alert
+                :md-active.sync="deleted"
+                md-title="Guest deleted!"
+                md-content="Guest has been deleted." />
+                
 <p v-if="guests.length < 1" class="empty-table">
     no guests
 </p>
@@ -61,7 +66,7 @@
                 <md-button v-on:click="editMode(guest)" :disabled="editing" class="md-fab md-mini md-plain">
                 <md-icon>edit</md-icon>
                 </md-button>
-                <md-button v-on:click="$emit('delete:guest', guest.id)" :disabled="editing" class="md-fab md-mini md-plain">
+                <md-button @click="deleted=true" v-on:click="$emit('delete:guest', guest.id)" :disabled="editing" class="md-fab md-mini md-plain">
                 <md-icon> delete </md-icon>
                 </md-button>
             </md-table-cell>
@@ -82,6 +87,8 @@ export default {
     data() {
         return {
             editing: null,
+            deleted: false,
+            edited: false,
         }
     },
     methods: {

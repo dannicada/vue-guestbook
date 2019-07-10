@@ -119,7 +119,7 @@ async created() {
       },
 
       //authentication methods
-      login() {
+    login() {
       this.$auth.login();
     },
     logout() {

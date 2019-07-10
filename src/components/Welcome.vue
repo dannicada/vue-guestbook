@@ -12,7 +12,7 @@
         </md-card-content>
         <md-card-actions>
           <md-button to= "/GuestForm" class="md-primary">Guest</md-button>
-          <md-button to="/login" class="md-primary">Admin</md-button>
+          <md-button @click.prevent="$auth.login()" class="md-primary">Admin</md-button>
         </md-card-actions>
       </md-ripple>
     </md-card>
