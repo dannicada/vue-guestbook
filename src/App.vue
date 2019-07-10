@@ -14,15 +14,19 @@
 
         <div class="md-toolbar-row">
           <md-tabs class="md-transparent">
-            <md-tab id="tab-home" md-label="Home" to="/home"> </md-tab>
-            <md-tab id="tab-GuestForm" md-label="New Guest" to="/GuestForm"></md-tab>
-            <md-tab id="tab-GuestTable" md-label="Manage Guests" to="/GuestTable"></md-tab>
+           
           </md-tabs>
+           <md-button to="/home"  class="md-raised">home</md-button>
+           <md-button to="/GuestForm"  class="md-raised">add guest</md-button>
+           <md-button to="/GuestTable" class="md-raised">manage guests</md-button>
           <md-button v-if="isAuthenticated"  @click.prevent="logout" class="md-raised md-accent">Logout</md-button>
         </div>
+        
+
       </md-app-toolbar>
 
       <md-app-content>
+      <md-progress-bar v-show="loggingIn" md-mode="indeterminate" />
       
         <router-view   
           @add:guest="addGuest"
@@ -75,7 +79,8 @@ export default {
         },       
 
       ],
-      isAuthenticated: false
+      isAuthenticated: false,
+      loggingIn: false
       };
       
     },
@@ -123,6 +128,7 @@ async created() {
       this.$auth.login();
     },
     logout() {
+      this.loggingIn=true;
       this.$auth.logOut();
     },
     handleLoginEvent(data) {
@@ -136,6 +142,9 @@ async created() {
 
 <style lang="scss" scoped>
   .md-toolbar-row {
+    margin-top: 24px;
+  }
+  .md-app-content {
     margin-top: 24px;
   }
 </style>

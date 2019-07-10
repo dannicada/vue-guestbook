@@ -4,7 +4,6 @@ import VueRouter from 'vue-router'
 import GuestTable from './components/GuestTable.vue'
 import GuestForm from './components/GuestForm.vue'
 import Welcome from './components/Welcome'
-import Login from './components/Login.vue'
 import Callback from './components/Callback.vue'
 
 import auth from '../auth/authService'
@@ -13,9 +12,9 @@ Vue.use(VueRouter)
 
 const router = new VueRouter({
     mode: 'history',
-    //base: '/home',
-
+    base: '/#/',
     routes: [
+
         {
             path: '/callback',
             name: 'callback',
@@ -30,11 +29,6 @@ const router = new VueRouter({
             name: 'Welcome',
             component: Welcome
             
-        },
-        {
-            path: '/login',
-            name: 'Login',
-            component: Login
         },
         {
             path: '/GuestForm',

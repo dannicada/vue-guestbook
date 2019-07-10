@@ -1,5 +1,7 @@
 <template>
 <div id = "guest-table">
+
+
   <md-dialog-alert
     :md-active.sync="deleted"
     md-title="Guest deleted!"
