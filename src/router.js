@@ -12,7 +12,7 @@ Vue.use(VueRouter)
 
 const router = new VueRouter({
     mode: 'history',
-    base: '/#/',
+    base: '/',
     routes: [
 
         {
@@ -22,7 +22,7 @@ const router = new VueRouter({
         },
         {
             path: "/",
-            component: Welcome,
+            redirect: '/home',
         },
         {
             path: '/home',

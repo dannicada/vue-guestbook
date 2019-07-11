@@ -13,13 +13,14 @@
         </div>
 
         <div class="md-toolbar-row">
-          <md-tabs class="md-transparent">
-           
+          <md-tabs md-sync-route class="md-transparent">
+            <md-tab to="/home" id="tab-home" class="md-button" md-label="Home"></md-tab>
+            <md-tab to="/GuestForm" id="tab-form" md-label="add guest"></md-tab>
+            <md-tab to="/GuestTable" id="tab-table" md-label="Manage guests"></md-tab>
           </md-tabs>
-           <md-button to="/home"  class="md-raised">home</md-button>
-           <md-button to="/GuestForm"  class="md-raised">add guest</md-button>
-           <md-button to="/GuestTable" class="md-raised">manage guests</md-button>
+   
           <md-button v-if="isAuthenticated"  @click.prevent="logout" class="md-raised md-accent">Logout</md-button>
+
         </div>
         
 
